@@ -1,0 +1,15 @@
+*{
+    margin:0;
+}
+.lewy{
+    height: 962.4px;
+    width: 20%;
+    float: left;
+    background-color: red;
+    
+}
+.prawy{
+    height: 962.4px;
+    width: 100%;
+    background-color: blue;
+}

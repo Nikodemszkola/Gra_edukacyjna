@@ -5,11 +5,40 @@
     height: 962.4px;
     width: 20%;
     float: left;
-    background-color: red;
+   
     
 }
 .prawy{
     height: 962.4px;
     width: 100%;
-    background-color: blue;
+    
+}
+.menu{
+    background-color: cornflowerblue;
+    background-image: url(zdj/giphy.gif);
+}
+.tytul{
+    text-align: center;
+    margin-top: 30px;
+    font-size:150px;
+    color: yellow;
+}
+.przycisk{
+    position: absolute;
+    left: 750px;
+    top: 450px;
+    border-radius: 20%;
+    background-color: green;
+    font-size: 80px;
+    height: 100px;
+    width: 400px;
+    text-align: center;
+}
+.link{
+text-decoration: none;
+color: bisque;
+
+}
+.przycisk:hover{
+    scale: 1.2;
 }

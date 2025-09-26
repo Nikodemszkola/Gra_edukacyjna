@@ -1,18 +1,24 @@
 *{
     margin:0;
+    box-sizing: border-box;
 }
-.lewy{
-    height: 962.4px;
-    width: 20%;
-    float: left;
- 
+.kontener {
+    display: flex;
+    height: 100vh; 
 }
 
-.prawy{
-    height: 962.4px;
-    width: 100%;
-    
+.lewy {
+    width: 20%;
+    background-color: #f0f0f0;
+    padding: 20px;
 }
+
+.prawy {
+    width: 80%;
+    padding: 20px;
+}
+
+
 .menu{
     background-color: cornflowerblue;
     background-image: url(zdj/giphy.gif);
@@ -41,4 +47,8 @@ color: bisque;
 }
 .przycisk:hover{
     scale: 1.2;
+}
+.przycisk2{
+width: 80px;
+height: 30px;
 }

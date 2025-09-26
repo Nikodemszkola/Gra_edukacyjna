@@ -7,12 +7,21 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<div class="lewy">
-    <h1 style="text-align: center;">Ustawienia</h1>
-    <p style="text-indent: 20px; margin-top: 80px; font-size: 20px;">Ile fiszek? <input type="text"  min="1" max="10" value="1-10" id="ile" onchange="slowka_definicje()"></p>
-    <p id="druk" style="padding: 10px;"></p>
-</div>
-<div class="prawy"></div> 
+    <div class="kontener">
+        <div class="lewy">
+            <h1 style="text-align: center;">Ustawienia</h1>
+            <p style="text-indent: 20px; margin-top: 80px; font-size: 20px;">Ile fiszek? <input type="text"  min="1" max="10" value="1-10" id="ile" onchange="slowka_definicje()"></p>
+            <p id="druk" style="margin: 20px;">
+            </p>
+            <p id="druk2" style="margin: 20px;"></p>
+            <h2 style="text-indent: 10px; margin-bottom: 10px;">Zmień kolor strony:</h2>
+            <button onclick="zmiana_koloru('Indigo')" class="przycisk2">Indigo</button>
+        <button onclick="zmiana_koloru('Aqua')" class="przycisk2">Aqua</button>
+        <button onclick="zmiana_koloru('Green')" class="przycisk2">Green</button>
+        </div>
+        <div class="prawy"><h1></h1></div> 
+    </div>
+
 <script src="skrypt.js"></script>   
 </body>
 </html>

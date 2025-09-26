@@ -9,8 +9,8 @@
 <body>
 <div class="lewy">
     <h1 style="text-align: center;">Ustawienia</h1>
-    <p style="text-indent: 20px; margin-top: 80px; font-size: 20px;">Ile fiszek? <input type="text" value="0-10" id="ile"></p>
-    
+    <p style="text-indent: 20px; margin-top: 80px; font-size: 20px;">Ile fiszek? <input type="text"  min="1" max="10" value="1-10" id="ile" onchange="slowka_definicje()"></p>
+    <p id="druk" style="padding: 10px;"></p>
 </div>
 <div class="prawy"></div> 
 <script src="skrypt.js"></script>   

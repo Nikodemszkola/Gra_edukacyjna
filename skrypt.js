@@ -9,8 +9,8 @@ function slowka_definicje(e) {
     if (!isNaN(ile) && ile >= 1 && ile <= 10) {
         for (let i = 1; i <= ile; i++) {
             
-            druk.innerHTML += `<p>Słówko nr ${i}: <input type="text"></p>`;
-            druk2.innerHTML += `<p>Definicja nr ${i}: <input type="text"></p>`;
+            druk.innerHTML += `<p>Słówko nr ${i}: <input type="text" name="${i}"></p>`;
+            druk2.innerHTML += `<p>Definicja nr ${i}: <input type="text" name="${i+10}"></p>`;
         }
     } else {
         druk.innerHTML = "<p>Wpisz liczbę od 1 do 10.</p>";
@@ -26,17 +26,39 @@ function zmiana_koloru(kolor) {
         console.error("Nie znaleziono elementu .prawy");
     }
 }
-function start_game() {
+
+
+function start_game() { 
     const ile = parseInt(document.getElementById("ile").value);
     const blok_prawy = document.getElementsByClassName("prawy")[0];
 
     blok_prawy.innerHTML = "";
 
-    for (let i = 0; i < ile * 2; i++) {
-        const el = document.createElement("div");
-        el.classList.add("fiszka");
-        el.textContent = ;
-        blok_prawy.appendChild(el);
+    for (let i = 1; i <= ile; i++) {
+        const wordInput = document.querySelector(`input[name="${i}"]`);  
+        
+        if (wordInput) {
+            const word = wordInput.value; 
+
+            const el = document.createElement("div");
+            el.classList.add("fiszka");
+            el.innerHTML = `<p>${word}</p>`;
+
+            blok_prawy.appendChild(el);
+        }
+    }
+
+    for (let i = 1; i <= ile; i++) {
+        const defInput = document.querySelector(`input[name="${i + 10}"]`);
+        
+        if (defInput) {
+            const def = defInput.value;
+
+            const el = document.createElement("div");
+            el.classList.add("fiszka");
+            el.innerHTML = `<p>${def}</p>`;
+
+            blok_prawy.appendChild(el);
+        }
     }
 }
-

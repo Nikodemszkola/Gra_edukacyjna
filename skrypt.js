@@ -31,34 +31,85 @@ function zmiana_koloru(kolor) {
 function start_game() { 
     const ile = parseInt(document.getElementById("ile").value);
     const blok_prawy = document.getElementsByClassName("prawy")[0];
-
     blok_prawy.innerHTML = "";
+
+    const pairs = [];
 
     for (let i = 1; i <= ile; i++) {
         const wordInput = document.querySelector(`input[name="${i}"]`);  
-        
-        if (wordInput) {
-            const word = wordInput.value; 
+        const defInput = document.querySelector(`input[name="${i + 10}"]`);
 
-            const el = document.createElement("div");
-            el.classList.add("fiszka");
-            el.innerHTML = `<p>${word}</p>`;
-
-            blok_prawy.appendChild(el);
+        if (wordInput && defInput) {
+            pairs.push({
+                word: wordInput.value.trim(),
+                definition: defInput.value.trim()
+            });
         }
     }
 
-    for (let i = 1; i <= ile; i++) {
-        const defInput = document.querySelector(`input[name="${i + 10}"]`);
-        
-        if (defInput) {
-            const def = defInput.value;
+    const allItems = [];
 
-            const el = document.createElement("div");
-            el.classList.add("fiszka");
-            el.innerHTML = `<p>${def}</p>`;
+    pairs.forEach(pair => {
+        allItems.push({ text: pair.word, type: "word", match: pair.definition });
+        allItems.push({ text: pair.definition, type: "definition", match: pair.word });
+    });
 
-            blok_prawy.appendChild(el);
-        }
+    
+    allItems.sort(() => Math.random() - 0.5);
+
+    let selected = null;
+
+    allItems.forEach(item => {
+        const el = document.createElement("div");
+        el.classList.add("fiszka");
+        el.textContent = item.text;
+        el.dataset.type = item.type;
+        el.dataset.match = item.match;
+
+        el.onclick = function () {
+            if (!selected) {
+                selected = el;
+                el.classList.add("selected");
+            } else {
+                
+                if (selected.textContent === el.dataset.match) {
+                    selected.style.opacity = "0";
+                    el.style.opacity = "0";
+                } else {
+                    selected.style.backgroundColor = "red";
+                    el.style.backgroundColor = "red";
+                    selected.classList.add("error");
+                    el.classList.add("error");
+
+                    setTimeout(() => {
+                        selected.classList.remove("error");
+                         el.classList.remove("error");
+                    }, 1000); 
+
+                }
+
+                selected.classList.remove("selected");
+                selected = null;
+            }
+        };
+
+        blok_prawy.appendChild(el);
+    });
+}
+
+function logika(){
+    for(let i =0;i <ile;i++){
+    const fiszki = document.querySelectorAll(`input[name="${i}"]`);
+    const definicja = document.querySelectorAll(`input[name="${i + 10}"]`);
+    if(fiszki == definicja){
+        fiszki.style.opacity = 0;
+        definicja.style.opacity = 0;
+    }
+    else{
+        fiszki.style.BackgroundColor = "red";
+        definicja.style.BackgroundColor = "red";
+    }
+
+
     }
 }

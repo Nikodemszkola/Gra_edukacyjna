@@ -88,3 +88,7 @@ height: 30px;
     justify-content: center;
     font-size: xx-large;
 }
+.fiszka.error {
+  background-color: red;
+  transition: background-color 0.3s ease;
+}

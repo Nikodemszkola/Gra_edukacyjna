@@ -35,7 +35,7 @@ function start_game() {
     for (let i = 0; i < ile * 2; i++) {
         const el = document.createElement("div");
         el.classList.add("fiszka");
-        el.textContent = `Fiszka ${i + 1}`;
+        el.textContent = ;
         blok_prawy.appendChild(el);
     }
 }

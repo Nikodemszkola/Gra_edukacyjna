@@ -36,7 +36,7 @@ function start_game(){
     {
         const zawartosc = document.getElementsByName(i);
         const el = document.createElement("div");
-        el.classList.add("bloczek")
+        el.classList.add("fiszka")
         el.textContent = zawartosc;
         prawy.innerHTML = el;
     }

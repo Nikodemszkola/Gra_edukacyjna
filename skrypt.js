@@ -26,20 +26,17 @@ function zmiana_koloru(kolor) {
         console.error("Nie znaleziono elementu .prawy");
     }
 }
-function start_game(){
+function start_game() {
     const ile = parseInt(document.getElementById("ile").value);
-    const blok_prawy = document.getElementsByClassName("prawy");
+    const blok_prawy = document.getElementsByClassName("prawy")[0];
 
-    prawy.innerHTML = "";
+    blok_prawy.innerHTML = "";
 
-    for(let i=0; i<ile*2; i++)
-    {
-        const zawartosc = document.getElementsByName(i);
+    for (let i = 0; i < ile * 2; i++) {
         const el = document.createElement("div");
-        el.classList.add("fiszka")
-        el.textContent = zawartosc;
-        prawy.innerHTML = el;
+        el.classList.add("fiszka");
+        el.textContent = `Fiszka ${i + 1}`;
+        blok_prawy.appendChild(el);
     }
-
 }
 

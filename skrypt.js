@@ -78,13 +78,9 @@ function start_game() {
                 } else {
                     selected.style.backgroundColor = "red";
                     el.style.backgroundColor = "red";
-                    selected.classList.add("error");
-                    el.classList.add("error");
-
-                    setTimeout(() => {
-                        selected.classList.remove("error");
-                         el.classList.remove("error");
-                    }, 1000); 
+                    selected.style.backgroundColor = "";
+                    el.style.backgroundColor = "";
+                   
 
                 }
 
@@ -112,4 +108,25 @@ function logika(){
 
 
     }
+}
+let sekundy = 0;
+let timerInterval = null;
+
+function start() {
+  start_game(); 
+  startTimer(); 
+}
+
+function startTimer() {
+  if (timerInterval === null) {
+    timerInterval = setInterval(() => {
+      sekundy++;
+      document.getElementById("czas").textContent = sekundy;
+    }, 1000);
+  }
+}
+
+function stopTimer() {
+  clearInterval(timerInterval);
+  timerInterval = null;
 }

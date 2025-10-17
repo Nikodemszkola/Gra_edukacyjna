@@ -71,24 +71,29 @@ function start_game() {
                 selected = el;
                 el.classList.add("selected");
             } else {
-                
                 if (selected.textContent === el.dataset.match) {
                     selected.style.opacity = "0";
                     el.style.opacity = "0";
+                    const remainingItems = document.querySelectorAll('.fiszka:not([style*="opacity: 0"])');
+                    if (remainingItems.length === 0) {
+                        stopTimer(); 
+                    }
                 } else {
                     selected.style.backgroundColor = "red";
                     el.style.backgroundColor = "red";
-                    selected.style.backgroundColor = "";
-                    el.style.backgroundColor = "";
-                   
-
+        
+                    setTimeout(() => {
+                        selected.style.backgroundColor = "";
+                        el.style.backgroundColor = "";
+                    }, 500);
                 }
-
+        
                 selected.classList.remove("selected");
                 selected = null;
             }
         };
-
+        
+            
         blok_prawy.appendChild(el);
     });
 }

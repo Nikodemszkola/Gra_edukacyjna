@@ -6,14 +6,14 @@ function slowka_definicje(e) {
     druk.innerHTML = "";
     druk2.innerHTML = "";
     if (e.key === "Enter"){
-    if (!isNaN(ile) && ile >= 1 && ile <= 10) {
+    if (!isNaN(ile) && ile >= 1 && ile <= 6) {
         for (let i = 1; i <= ile; i++) {
             
             druk.innerHTML += `<p>Słówko nr ${i}: <input type="text" name="${i}"></p>`;
             druk2.innerHTML += `<p>Definicja nr ${i}: <input type="text" name="${i+10}"></p>`;
         }
     } else {
-        druk.innerHTML = "<p>Wpisz liczbę od 1 do 10.</p>";
+        druk.innerHTML = "<p>Wpisz liczbę od 1 do 6.</p>";
     }}
 }
 
@@ -129,6 +129,12 @@ function start_game() {
 
         blok_prawy.appendChild(el);
     });
+    const druk = document.getElementById("druk");
+    const druk2 = document.getElementById("druk2");
+    if (druk && druk2) {
+        druk.innerHTML = "";
+        druk2.innerHTML = "";
+    }
 }
 
 

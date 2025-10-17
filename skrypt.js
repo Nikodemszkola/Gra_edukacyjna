@@ -20,12 +20,15 @@ function slowka_definicje(e) {
 
 function zmiana_koloru(kolor) {
     const prawy = document.querySelector(".prawy");
+
     if (prawy) {
         prawy.style.backgroundColor = kolor;
     } else {
         console.error("Nie znaleziono elementu .prawy");
     }
 }
+
+
 
 
 

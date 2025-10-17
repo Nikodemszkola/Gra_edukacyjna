@@ -28,7 +28,7 @@ function zmiana_koloru(kolor) {
 }
 
 
-function start_game() { 
+/*function start_game() { 
     const ile = parseInt(document.getElementById("ile").value);
     const blok_prawy = document.getElementsByClassName("prawy")[0];
     blok_prawy.innerHTML = "";
@@ -66,37 +66,164 @@ function start_game() {
         el.dataset.type = item.type;
         el.dataset.match = item.match;
 
-        el.onclick = function () {
-            if (!selected) {
-                selected = el;
-                el.classList.add("selected");
-            } else {
-                if (selected.textContent === el.dataset.match) {
-                    selected.style.opacity = "0";
-                    el.style.opacity = "0";
-                    const remainingItems = document.querySelectorAll('.fiszka:not([style*="opacity: 0"])');
-                    if (remainingItems.length === 0) {
-                        stopTimer(); 
+        let selected = null;
+
+const elements = document.querySelectorAll('.fiszka'); // Collect all elements
+
+elements.forEach(el => {
+    el.onclick = function () {
+        if (!selected) {
+            selected = el;
+            el.classList.add("selected");
+        } else {
+            if (selected.textContent === el.dataset.match) {
+                // If there's a correct match
+                const matchedSelected = selected; // Store reference
+                const matchedEl = el; // Store reference
+                
+                matchedSelected.style.backgroundColor = "green";
+                matchedEl.style.backgroundColor = "green";
+
+                // Use setTimeout to fade out after 1 second
+                setTimeout(() => {
+                    // Check if references are still valid
+                    if (matchedSelected && matchedEl) {
+                        matchedSelected.style.opacity = "0";
+                        matchedEl.style.opacity = "0";
+
+                        // Check for remaining items
+                        const remainingItems = document.querySelectorAll('.fiszka:not([style*="opacity: 0"])');
+                        if (remainingItems.length === 0) {
+                            stopTimer(); 
+                        }
                     }
-                } else {
-                    selected.style.backgroundColor = "red";
-                    el.style.backgroundColor = "red";
-        
-                    setTimeout(() => {
+                }, 1000); // 1 second delay
+            } else {
+                // If there's an incorrect match
+                selected.style.backgroundColor = "red";
+                el.style.backgroundColor = "red";
+
+                setTimeout(() => {
+                    if (selected) {
                         selected.style.backgroundColor = "";
+                    }
+                    if (el) {
                         el.style.backgroundColor = "";
-                    }, 500);
-                }
-        
-                selected.classList.remove("selected");
-                selected = null;
+                    }
+                }, 500); // 0.5 second delay
             }
-        };
+
+            selected.classList.remove("selected");
+            selected = null;
+        }
+    };
+});
+
+        
         
             
         blok_prawy.appendChild(el);
     });
+}*/
+function start_game() { 
+    const ile = parseInt(document.getElementById("ile").value);
+    const blok_prawy = document.getElementsByClassName("prawy")[0];
+    blok_prawy.innerHTML = "";
+
+    const pairs = [];
+
+    for (let i = 1; i <= ile; i++) {
+        const wordInput = document.querySelector(`input[name="${i}"]`);  
+        const defInput = document.querySelector(`input[name="${i + 10}"]`);
+
+        if (wordInput && defInput) {
+            pairs.push({
+                word: wordInput.value.trim(),
+                definition: defInput.value.trim()
+            });
+        }
+    }
+
+    const allItems = [];
+
+    pairs.forEach(pair => {
+        allItems.push({ text: pair.word, type: "word", match: pair.definition });
+        allItems.push({ text: pair.definition, type: "definition", match: pair.word });
+    });
+
+    // Shuffle the items
+    allItems.sort(() => Math.random() - 0.5);
+
+    let selected = null; // Main selected variable
+
+    allItems.forEach(item => {
+        const el = document.createElement("div");
+        el.classList.add("fiszka");
+        el.textContent = item.text;
+        el.dataset.type = item.type;
+        el.dataset.match = item.match;
+
+        el.onclick = function () { // Assign the click event directly
+            if (!selected) {
+                // First selection
+                selected = el;
+                el.classList.add("selected");
+            } else {
+                // Second selection
+                if (selected.textContent === el.dataset.match) {
+                    // If there's a correct match
+                    const matchedSelected = selected; 
+                    const matchedEl = el; 
+                    
+                    matchedSelected.style.backgroundColor = "green";
+                    matchedEl.style.backgroundColor = "green";
+
+                    // Use setTimeout to fade out after 1 second
+                    setTimeout(() => {
+                        // Check if references are still valid before accessing style
+                        if (matchedSelected && matchedSelected.style !== undefined) {
+                            matchedSelected.style.opacity = "0";
+                        }
+                        if (matchedEl && matchedEl.style !== undefined) {
+                            matchedEl.style.opacity = "0";
+                        }
+
+                        // Check for remaining items
+                        const remainingItems = document.querySelectorAll('.fiszka:not([style*="opacity: 0"])');
+                        if (remainingItems.length === 0) {
+                            stopTimer(); 
+                        }
+                    }, 1000); // 1 second delay
+                } else {
+                    // If there's an incorrect match
+                    const wrongSelected = selected; // Store the reference for the incorrect item
+                    const wrongEl = el; // Store the reference for the incorrect item
+
+                    wrongSelected.style.backgroundColor = "red";
+                    wrongEl.style.backgroundColor = "red";
+
+                    setTimeout(() => {
+                        // Reset both selected elements immediately
+                        if (wrongSelected) {
+                            wrongSelected.style.backgroundColor = "";
+                            wrongSelected.classList.remove("selected"); // Remove selection
+                        }
+                        if (wrongEl) {
+                            wrongEl.style.backgroundColor = "";
+                        }
+                        
+                    }, 500); // 0.5 second delay
+                }
+
+                // Reset the selected variable
+                selected = null; 
+            }
+        };
+
+        blok_prawy.appendChild(el);
+    });
 }
+
 
 function logika(){
     for(let i =0;i <ile;i++){

@@ -55,10 +55,10 @@ function start_game() {
         allItems.push({ text: pair.definition, type: "definition", match: pair.word });
     });
 
-    // Shuffle the items
+   
     allItems.sort(() => Math.random() - 0.5);
 
-    let selected = null; // Main selected variable
+    let selected = null;
 
     allItems.forEach(item => {
         const el = document.createElement("div");
@@ -67,24 +67,24 @@ function start_game() {
         el.dataset.type = item.type;
         el.dataset.match = item.match;
 
-        el.onclick = function () { // Assign the click event directly
+        el.onclick = function () { 
             if (!selected) {
-                // First selection
+                
                 selected = el;
                 el.classList.add("selected");
             } else {
-                // Second selection
+               
                 if (selected.textContent === el.dataset.match) {
-                    // If there's a correct match
+                   
                     const matchedSelected = selected; 
                     const matchedEl = el; 
                     
                     matchedSelected.style.backgroundColor = "green";
                     matchedEl.style.backgroundColor = "green";
 
-                    // Use setTimeout to fade out after 1 second
+                 
                     setTimeout(() => {
-                        // Check if references are still valid before accessing style
+                        
                         if (matchedSelected && matchedSelected.style !== undefined) {
                             matchedSelected.style.opacity = "0";
                         }
@@ -92,34 +92,34 @@ function start_game() {
                             matchedEl.style.opacity = "0";
                         }
 
-                        // Check for remaining items
+                      
                         const remainingItems = document.querySelectorAll('.fiszka:not([style*="opacity: 0"])');
                         if (remainingItems.length === 0) {
                             stopTimer(); 
                         }
-                    }, 1000); // 1 second delay
+                    }, 1000);   
                 } else {
-                    // If there's an incorrect match
-                    const wrongSelected = selected; // Store the reference for the incorrect item
-                    const wrongEl = el; // Store the reference for the incorrect item
+                   
+                    const wrongSelected = selected; 
+                    const wrongEl = el; 
 
                     wrongSelected.style.backgroundColor = "red";
                     wrongEl.style.backgroundColor = "red";
 
                     setTimeout(() => {
-                        // Reset both selected elements immediately
+                        
                         if (wrongSelected) {
                             wrongSelected.style.backgroundColor = "";
-                            wrongSelected.classList.remove("selected"); // Remove selection
+                            wrongSelected.classList.remove("selected"); 
                         }
                         if (wrongEl) {
                             wrongEl.style.backgroundColor = "";
                         }
                         
-                    }, 500); // 0.5 second delay
+                    }, 500); 
                 }
 
-                // Reset the selected variable
+              
                 selected = null; 
             }
         };
@@ -150,7 +150,8 @@ let timerInterval = null;
 
 function start() {
   start_game(); 
-  startTimer(); 
+  startTimer();
+
 }
 
 function startTimer() {
